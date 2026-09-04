@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Cross, CheckCircle, Eye, TrendingUp, Target, Droplets, Leaf, Clock, HeartPulse, UserCircle } from 'lucide-react'
 import { treatmentCategories } from '../data/treatments'
-import { blogs } from '../data/blogs'
 
 const whyChooseUs = [
   { title: 'Personalized Care', text: 'Tailored treatment plans based on your unique health history.' },
@@ -12,10 +11,14 @@ const whyChooseUs = [
 ]
 
 const heroImages = [
-  '/hero-image.jpg',
-  '/hero-slide-1.png',
-  '/hero-slide-2.png',
-  '/hero-slide-3.png'
+  '/homeTransition9.png',
+  '/homeTransition6.png',
+  // '/homepageTransition8.png',
+  '/homeTransition7.png',
+  '/homePageTrans5.png',
+  '/homeTransition10.png',
+  '/homeTransition11.png',
+  '/homeTransition12.png'
 ]
 
 const whatIsHomeopathy = [
@@ -64,10 +67,138 @@ const ourValues = [
   },
 ]
 
-const blogCategories = ['All', ...new Set(blogs.map(b => b.category))]
+const RevealRow = ({ children, index }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mediaQuery.matches) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  const isEven = index % 2 === 0;
+  
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-[600ms] ease-out ${
+        isVisible 
+          ? 'opacity-100 translate-x-0' 
+          : `opacity-0 ${isEven ? '-translate-x-10' : 'translate-x-10'}`
+      }`}
+    >
+      {children(isVisible)}
+    </div>
+  );
+};
+
+const RevealCard = ({ children, index }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mediaQuery.matches) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -20px 0px' }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+  
+  return (
+    <div
+      ref={ref}
+      className={`h-full transition-all duration-500 ease-out ${
+        isVisible 
+          ? 'opacity-100 translate-y-0' 
+          : 'opacity-0 translate-y-8'
+      }`}
+      style={{ transitionDelay: isVisible ? `${index * 120}ms` : '0ms' }}
+    >
+      {children}
+    </div>
+  );
+};
+
+const ProgressiveLine = () => {
+  const [height, setHeight] = useState(0);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mediaQuery.matches) {
+      setHeight(100);
+      return;
+    }
+
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      
+      const rect = containerRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      const start = windowHeight * 0.75; 
+      const end = windowHeight * 0.25;   
+      
+      const totalDistance = rect.height + (start - end);
+      const currentScroll = start - rect.top;
+      
+      let progress = currentScroll / totalDistance;
+      progress = Math.max(0, Math.min(1, progress));
+      
+      setHeight(progress * 100);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div ref={containerRef} className="absolute left-[24px] top-0 bottom-0 w-[2px] bg-brand-blue/10 md:left-1/2 md:-ml-[1px]">
+      <div 
+        className="absolute top-0 left-0 w-full bg-brand-blue"
+        style={{ height: `${height}%`, transition: 'height 100ms ease-out' }}
+      />
+    </div>
+  );
+};
+
 export default function Home({ onBookAppointment }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [activeCategory, setActiveCategory] = useState('All')
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -79,8 +210,19 @@ export default function Home({ onBookAppointment }) {
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-brand-bg">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 py-14 md:grid-cols-2 md:py-24 lg:px-12">
+      <section 
+        className="relative overflow-hidden"
+        style={{ 
+          backgroundImage: 'url(/homeBackground2.png)', 
+          backgroundSize: 'cover', 
+          backgroundPosition: 'center', 
+          backgroundRepeat: 'no-repeat' 
+        }}
+      >
+        {/* White/light overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-white/40 pointer-events-none" />
+        
+        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 py-14 md:grid-cols-2 md:py-24 lg:px-12 relative z-10">
           <div className="justify-self-center md:justify-self-end md:pr-4 lg:pr-10">
             <p className="inline-flex items-center gap-2 rounded-full bg-brand-redLight px-4 py-1.5 text-xs font-semibold text-brand-red">
               <Cross size={14} /> Now Accepting New Patients
@@ -113,7 +255,7 @@ export default function Home({ onBookAppointment }) {
                 key={img}
                 src={img} 
                 alt="Homeopathic Care" 
-                className={`absolute inset-0 w-full h-full rounded-2xl shadow-cardHover object-cover mix-blend-multiply transition-opacity duration-700 ${
+                className={`absolute inset-0 w-full h-full rounded-2xl shadow-cardHover object-contain mix-blend-multiply transition-opacity duration-700 ${
                   index === currentImageIndex ? 'opacity-90' : 'opacity-0'
                 }`}
               />
@@ -122,8 +264,11 @@ export default function Home({ onBookAppointment }) {
         </div>
       </section>
 
-      {/* What is Homeopathy */}
-      <section className="bg-white py-16 md:py-24 border-b border-brand-border">
+      {/* Gradient Wrapper for all sections below Hero */}
+      <div className="bg-[linear-gradient(to_bottom,#ffffff_0%,#F8FAFC_40%,#EAF2FC_100%)]">
+
+        {/* What is Homeopathy */}
+        <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center">
             <h2 className="font-heading text-3xl font-extrabold text-brand-blue md:text-4xl">What is Homeopathy?</h2>
@@ -134,32 +279,35 @@ export default function Home({ onBookAppointment }) {
           
           {/* Zigzag Layout */}
           <div className="relative mx-auto max-w-4xl mt-16">
-            {/* Vertical Line Desktop */}
-            <div className="absolute left-[24px] top-0 bottom-0 w-[2px] bg-brand-blue/20 md:left-1/2 md:-ml-[1px]" />
+            <ProgressiveLine />
           
             <div className="space-y-12 md:space-y-16">
               {whatIsHomeopathy.filter((_, idx) => idx !== 3).map((item, i) => (
-                <div key={item.title} className={`relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-0 ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
-                  
-                  {/* Side A: Icon + Heading */}
-                  <div className={`w-full md:w-1/2 flex items-center ${i % 2 === 0 ? 'md:pr-12 md:justify-end' : 'md:pl-12 md:justify-start'}`}>
-                    <div className={`flex items-center gap-4 ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
-                       <div className="flex shrink-0 h-12 w-12 items-center justify-center rounded-full bg-brand-blue text-white shadow-md relative z-10 ring-4 ring-white md:ring-0">
-                          <item.icon size={24} />
-                       </div>
-                       <h3 className={`font-heading text-xl font-bold text-brand-ink ${i % 2 !== 0 ? 'md:text-right' : 'md:text-left'}`}>{item.title}</h3>
+                <RevealRow key={item.title} index={i}>
+                  {(isVisible) => (
+                    <div className={`relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-0 ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+                      
+                      {/* Side A: Icon + Heading */}
+                      <div className={`w-full md:w-1/2 flex items-center ${i % 2 === 0 ? 'md:pr-12 md:justify-end' : 'md:pl-12 md:justify-start'}`}>
+                        <div className={`flex items-center gap-4 ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+                           <div className="flex shrink-0 h-12 w-12 items-center justify-center rounded-full bg-brand-blue text-white shadow-md relative z-10 ring-4 ring-white md:ring-0">
+                              <item.icon size={24} />
+                           </div>
+                           <h3 className={`font-heading text-xl font-bold text-brand-ink ${i % 2 !== 0 ? 'md:text-right' : 'md:text-left'}`}>{item.title}</h3>
+                        </div>
+                      </div>
+              
+                      {/* Desktop Center Node on line */}
+                      <div className={`hidden md:block absolute left-1/2 -ml-[5px] top-1/2 -mt-[5px] h-2.5 w-2.5 rounded-full bg-brand-red ring-4 ring-white z-10 transition-transform duration-500 delay-[100ms] ${isVisible ? 'scale-100' : 'scale-0'} [transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)]`} />
+              
+                      {/* Side B: Text */}
+                      <div className={`w-full md:w-1/2 pl-16 md:pl-0 ${i % 2 === 0 ? 'md:pl-12' : 'md:pr-12'}`}>
+                        <p className={`text-sm leading-relaxed text-brand-slate ${i % 2 !== 0 ? 'md:text-right' : 'md:text-left'}`}>{item.text}</p>
+                      </div>
+              
                     </div>
-                  </div>
-          
-                  {/* Desktop Center Node on line */}
-                  <div className="hidden md:block absolute left-1/2 -ml-[5px] top-1/2 -mt-[5px] h-2.5 w-2.5 rounded-full bg-brand-red ring-4 ring-white z-10" />
-          
-                  {/* Side B: Text */}
-                  <div className={`w-full md:w-1/2 pl-16 md:pl-0 ${i % 2 === 0 ? 'md:pl-12' : 'md:pr-12'}`}>
-                    <p className={`text-sm leading-relaxed text-brand-slate ${i % 2 !== 0 ? 'md:text-right' : 'md:text-left'}`}>{item.text}</p>
-                  </div>
-          
-                </div>
+                  )}
+                </RevealRow>
               ))}
             </div>
           </div>
@@ -225,26 +373,28 @@ export default function Home({ onBookAppointment }) {
       </section>
 
       {/* Why Choose Us */}
-      <section className="border-y border-brand-border bg-white">
+      <section>
         <div className="mx-auto max-w-7xl px-6 py-16">
           <div className="text-center mb-10">
             <h2 className="font-heading text-2xl font-extrabold text-brand-blue md:text-3xl">Why Choose Us</h2>
             <p className="mt-2 text-sm text-brand-slate">Dedicated to providing the highest standard of homeopathic care.</p>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {whyChooseUs.map((item) => (
-              <div key={item.title} className="flex flex-col items-center text-center p-6 rounded-xl2 bg-brand-bg border border-brand-border">
-                <CheckCircle className="text-brand-blue mb-4" size={28} />
-                <h3 className="font-heading text-lg font-bold text-brand-ink">{item.title}</h3>
-                <p className="mt-2 text-sm text-brand-slate">{item.text}</p>
-              </div>
+            {whyChooseUs.map((item, index) => (
+              <RevealCard key={item.title} index={index}>
+                <div className="group flex h-full flex-col items-center text-center p-6 rounded-xl2 bg-brand-bg border border-brand-border transition-all duration-[250ms] ease-out lg:hover:-translate-y-1.5 lg:hover:shadow-lg lg:hover:border-brand-blue/20">
+                  <CheckCircle className="text-brand-blue mb-4 transition-transform duration-[250ms] lg:group-hover:scale-[1.1]" size={28} />
+                  <h3 className="font-heading text-lg font-bold text-brand-ink">{item.title}</h3>
+                  <p className="mt-2 text-sm text-brand-slate">{item.text}</p>
+                </div>
+              </RevealCard>
             ))}
           </div>
         </div>
       </section>
 
       {/* Our Values */}
-      <section className="bg-brand-bg py-16">
+      <section className="py-16">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <h2 className="font-heading text-3xl font-extrabold text-brand-blue">Our Values</h2>
           <p className="mt-3 text-brand-slate max-w-2xl mx-auto">
@@ -297,64 +447,8 @@ export default function Home({ onBookAppointment }) {
         </div>
       </section>
 
-      {/* Blog preview */}
-      <section className="bg-brand-bg py-16">
-        <style>{`
-          @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-          .hide-scrollbar::-webkit-scrollbar { display: none; }
-          .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        `}</style>
-        
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
-            <h2 className="font-heading text-2xl font-extrabold text-brand-blue md:text-3xl">Health Tips & Articles</h2>
-            {/* Tabs */}
-            <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-2 md:pb-0">
-              {blogCategories.map(cat => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`whitespace-nowrap px-6 py-2.5 text-sm font-bold rounded-full transition-colors ${
-                    activeCategory === cat 
-                      ? 'bg-brand-blue text-white shadow-md' 
-                      : 'bg-white text-brand-slate border border-brand-border hover:bg-brand-blueLight hover:text-brand-blue'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
-          
-          <div 
-            className="grid grid-cols-1 gap-6 md:grid-cols-3 min-h-[250px]"
-            key={activeCategory}
-            style={{ animation: 'fadeIn 500ms ease-out forwards' }}
-          >
-            {blogs
-              .filter(b => activeCategory === 'All' || b.category === activeCategory)
-              .map((b) => (
-              <Link 
-                key={b.slug} 
-                to={`/blogs/${b.slug}`} 
-                className="rounded-xl2 bg-white p-6 shadow-card hover:shadow-cardHover border border-brand-border flex flex-col transition-transform hover:-translate-y-1"
-              >
-                <div className="mb-4 flex items-center justify-between">
-                  <span className="text-xs font-bold text-brand-red bg-brand-redLight px-3 py-1 rounded-full">{b.category}</span>
-                  <span className="text-xs font-medium text-brand-slate">
-                    {new Date(b.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                  </span>
-                </div>
-                <h3 className="font-heading text-lg font-bold text-brand-ink mb-3 line-clamp-2">{b.title}</h3>
-                <p className="text-sm text-brand-slate line-clamp-3 mb-2 flex-1">{b.excerpt}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+
+      </div>
 
       {/* CTA banner */}
       <section className="bg-brand-blueDeep py-14">

@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom'
 import { Facebook, Instagram, Youtube, Linkedin, MapPin, Mail, Phone, Heart } from 'lucide-react'
-import { clinicRegions } from '../data/clinics'
 
 export default function Footer() {
   return (
     <footer className="bg-brand-blueDeep text-white">
       <div className="mx-auto max-w-7xl px-6 py-12">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2">
           <div>
             <div className="flex items-center gap-2">
               <Heart className="text-brand-red" fill="#D62027" size={26} strokeWidth={0} />
@@ -23,7 +22,10 @@ export default function Footer() {
               <Mail size={16} /> doctor@wecarehomeopathy.com
             </p>
             <div className="mt-4 flex gap-3">
-              <Facebook size={18} /> <Instagram size={18} /> <Youtube size={18} /> <Linkedin size={18} />
+              <a href="#" className="rounded-full bg-white/10 p-2 text-white hover:bg-brand-red"><Facebook size={16} /></a>
+              <a href="#" className="rounded-full bg-white/10 p-2 text-white hover:bg-brand-red"><Instagram size={16} /></a>
+              <a href="#" className="rounded-full bg-white/10 p-2 text-white hover:bg-brand-red"><Youtube size={16} /></a>
+              <a href="#" className="rounded-full bg-white/10 p-2 text-white hover:bg-brand-red"><Linkedin size={16} /></a>
             </div>
           </div>
 
@@ -32,27 +34,10 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-white/85">
               <li><Link to="/about">About Us</Link></li>
               <li><Link to="/treatments">Treatments</Link></li>
-              <li><Link to="/clinics">Clinics</Link></li>
-              <li><Link to="/blogs">Blogs</Link></li>
+
               <li><Link to="/contact">Contact Us</Link></li>
               <li><Link to="/pay-now">Pay Now</Link></li>
             </ul>
-          </div>
-
-          <div className="md:col-span-2">
-            <p className="mb-3 text-sm font-bold uppercase tracking-wide text-white/60">Our Clinics</p>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3">
-              {clinicRegions.map((r) => (
-                <div key={r.region}>
-                  <p className="text-xs font-semibold text-brand-redLight/90">{r.region}</p>
-                  <ul className="mt-1.5 space-y-1 text-xs text-white/75">
-                    {r.branches.slice(0, 4).map((b) => (
-                      <li key={b.slug}><Link to={`/clinics/${b.slug}`}>{b.name}</Link></li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 

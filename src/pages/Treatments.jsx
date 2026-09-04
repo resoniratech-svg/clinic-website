@@ -18,7 +18,7 @@ export default function Treatments() {
     "Our medicines are safe for all age groups, including infants, pregnant women, and the elderly. They help build immunity and provide long-lasting relief from both acute and chronic ailments. Explore our comprehensive range of specialized treatments below, designed to help you achieve optimal health and well-being."
   ]
 
-  const bannerSrc = category?.banner || "/treatments-banner.png"
+  const bannerSrc = category?.banner || "/treatment-correct.png"
   const descriptionText = category?.description || null
   const paragraphs = descriptionText ? descriptionText.split('\n\n') : defaultDescription
 
@@ -34,7 +34,7 @@ export default function Treatments() {
       </div>
 
       {/* Main Content */}
-      <div className="mx-auto max-w-7xl px-6 py-14">
+      <div className="mx-auto max-w-7xl px-6 py-8">
         <div className="mb-12 max-w-4xl">
           <h1 className="font-heading text-4xl font-extrabold text-brand-blue mb-6">
             {category ? category.name : 'Detailed Information About Homeopathy Treatment'}

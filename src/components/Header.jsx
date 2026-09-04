@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { Menu, X, Phone, ChevronDown } from 'lucide-react'
+import { Menu, X, ChevronDown, Phone, MapPin } from 'lucide-react'
 import { treatmentCategories } from '../data/treatments'
-import { clinicRegions } from '../data/clinics'
 
 const navLinkClass = ({ isActive }) =>
   `text-sm font-semibold transition-colors ${
@@ -34,7 +33,7 @@ export default function Header({ onBookAppointment }) {
       </div>
 
       {/* Main nav */}
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 md:px-6">
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-2 md:px-6">
         <Link to="/" className="flex items-center md:ml-8">
           <img src="/logo2.png" alt="We Care Homeopathy Logo" className="h-14 md:h-20 w-auto object-contain" />
         </Link>
@@ -43,12 +42,12 @@ export default function Header({ onBookAppointment }) {
         <nav className="hidden items-center gap-7 lg:flex">
           <NavLink to="/" className={navLinkClass} end>Home</NavLink>
 
-          <div className="group relative" onMouseEnter={() => setForceCloseDropdown(false)}>
-            <button className="flex items-center gap-1 text-sm font-semibold text-brand-ink hover:text-brand-blue">
+          <div className="group" onMouseEnter={() => setForceCloseDropdown(false)}>
+            <button className="flex items-center gap-1 text-sm font-semibold text-brand-ink hover:text-brand-blue py-6 -my-6">
               Treatments <ChevronDown size={15} />
             </button>
-            <div className={`absolute left-0 top-full z-50 w-[950px] xl:w-[1100px] rounded-xl2 border border-brand-border bg-white p-6 shadow-cardHover transition-all ${forceCloseDropdown ? 'invisible opacity-0' : 'invisible opacity-0 group-hover:visible group-hover:opacity-100'}`}>
-              <div className="grid grid-cols-5 gap-6">
+            <div className={`absolute left-1/2 top-full z-50 w-[950px] xl:w-[1100px] -translate-x-1/2 pt-4 -mt-4 transition-all ${forceCloseDropdown ? 'invisible opacity-0' : 'invisible opacity-0 group-hover:visible group-hover:opacity-100'}`}>
+              <div className="rounded-xl2 border border-brand-border bg-white p-6 shadow-cardHover grid grid-cols-5 gap-6">
                 {treatmentCategories.map((cat) => (
                   <div key={cat.id}>
                     <Link onClick={handleLinkClick} to={`/treatments/category/${cat.slug}`} className="mb-4 block text-base font-bold text-brand-red hover:underline">
@@ -74,34 +73,8 @@ export default function Header({ onBookAppointment }) {
             </div>
           </div>
 
-          <div className="group relative" onMouseEnter={() => setForceCloseDropdown(false)}>
-            <button className="flex items-center gap-1 text-sm font-semibold text-brand-ink hover:text-brand-blue">
-              Clinics <ChevronDown size={15} />
-            </button>
-            <div className={`absolute left-1/2 top-full z-50 w-[520px] -translate-x-1/2 rounded-xl2 border border-brand-border bg-white p-5 shadow-cardHover transition-all ${forceCloseDropdown ? 'invisible opacity-0' : 'invisible opacity-0 group-hover:visible group-hover:opacity-100'}`}>
-              <div className="grid grid-cols-3 gap-4">
-                {clinicRegions.map((r) => (
-                  <div key={r.region}>
-                    <p className="mb-2 text-xs font-bold uppercase tracking-wide text-brand-red">{r.region}</p>
-                    <ul className="space-y-1.5">
-                      {r.branches.slice(0, 4).map((b) => (
-                        <li key={b.slug}>
-                          <Link onClick={handleLinkClick} to={`/clinics/${b.slug}`} className="text-sm text-brand-slate hover:text-brand-blue">
-                            {b.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-              <Link onClick={handleLinkClick} to="/clinics" className="mt-4 inline-block text-sm font-semibold text-brand-blue hover:underline">
-                View all clinics →
-              </Link>
-            </div>
-          </div>
 
-          <NavLink to="/blogs" className={navLinkClass}>Blogs</NavLink>
+
           <NavLink to="/about" className={navLinkClass}>About Us</NavLink>
           <NavLink to="/contact" className={navLinkClass}>Contact Us</NavLink>
         </nav>
@@ -159,26 +132,8 @@ export default function Header({ onBookAppointment }) {
               ))}
             </MobileAccordion>
 
-            <MobileAccordion
-              label="Clinics"
-              open={mobileSection === 'clinics'}
-              onToggle={() => toggleMobileSection('clinics')}
-            >
-              {clinicRegions.map((r) => (
-                <div key={r.region} className="mb-3">
-                  <p className="text-xs font-bold uppercase text-brand-red">{r.region}</p>
-                  <div className="mt-1 flex flex-col gap-1.5 pl-2">
-                    {r.branches.map((b) => (
-                      <Link key={b.slug} to={`/clinics/${b.slug}`} onClick={() => setMobileOpen(false)} className="text-sm text-brand-slate">
-                        {b.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </MobileAccordion>
 
-            <MobileLink to="/blogs" onClick={() => setMobileOpen(false)}>Blogs</MobileLink>
+
             <MobileLink to="/about" onClick={() => setMobileOpen(false)}>About Us</MobileLink>
             <MobileLink to="/contact" onClick={() => setMobileOpen(false)}>Contact Us</MobileLink>
             <MobileLink to="/pay-now" onClick={() => setMobileOpen(false)}>Pay Now</MobileLink>
