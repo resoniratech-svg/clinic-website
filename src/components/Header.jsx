@@ -27,7 +27,7 @@ export default function Header({ onBookAppointment }) {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-1.5 text-xs">
           <span>We Care. We Heal. We Serve.</span>
           <div className="flex items-center gap-4">
-            <a href="tel:+917337557851" className="hover:text-brand-redLight">India: +91 xxxxx xxxxx</a>
+            <a href="tel:+917036670881" className="hover:text-brand-redLight">+91 70366 70881 / 70366 70887</a>
           </div>
         </div>
       </div>
@@ -80,8 +80,8 @@ export default function Header({ onBookAppointment }) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a href="tel:+917337557851" className="hidden items-center gap-1.5 text-sm font-semibold text-brand-blue md:flex">
-            <Phone size={16} /> +91 xxxxx xxxxx
+          <a href="tel:+917036670881" className="hidden items-center gap-1.5 text-sm font-semibold text-brand-blue md:flex">
+            <Phone size={16} /> +91 70366 70881 / 70366 70887
           </a>
           <button
             onClick={onBookAppointment}
@@ -144,8 +144,8 @@ export default function Header({ onBookAppointment }) {
             >
               Book Appointment
             </button>
-            <a href="tel:+917337557851" className="mt-3 flex items-center justify-center gap-2 rounded-full border-2 border-brand-blue px-6 py-3 text-sm font-semibold text-brand-blue">
-              <Phone size={16} /> +91 xxxxx xxxxx
+            <a href="tel:+917036670881" className="mt-3 flex items-center justify-center gap-2 rounded-full border-2 border-brand-blue px-6 py-3 text-sm font-semibold text-brand-blue">
+              <Phone size={16} /> +91 70366 70881 / 70366 70887
             </a>
           </div>
         </div>

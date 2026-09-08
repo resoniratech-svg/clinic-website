@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { MapPin, Phone, Mail } from 'lucide-react'
+import { MapPin, Phone, Mail, Globe } from 'lucide-react'
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
@@ -21,10 +21,10 @@ export default function Contact() {
           <div className="space-y-4 rounded-xl2 border border-brand-border bg-white p-6 shadow-card">
             <p className="flex items-start gap-3 text-sm text-brand-slate">
               <MapPin size={18} className="mt-0.5 shrink-0 text-brand-blue" />
-              No. 69-1, 2nd Floor, Park View Enclave, Road No. 1, Jubilee Hills, Hyderabad, Telangana 500033.
+              # 6-6-576, Near Mancherial Chowrastha, Near Civil Hospital, Opp. Vasudeva Hospital, Karimnagar, Telangana - 505 001.
             </p>
             <p className="flex items-center gap-3 text-sm text-brand-slate">
-              <Phone size={18} className="text-brand-blue" /> +91 xxxxx xxxxx
+              <Phone size={18} className="text-brand-blue" /> +91 70366 70881 / 70366 70887
             </p>
             <p className="flex items-center gap-3 text-sm text-brand-slate">
               <Mail size={18} className="text-brand-blue" /> doctor@wecarehomeopathy.com

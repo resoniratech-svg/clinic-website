@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Facebook, Instagram, Youtube, Linkedin, MapPin, Mail, Phone, Heart } from 'lucide-react'
+import { Facebook, Instagram, Youtube, Linkedin, MapPin, Mail, Phone, Heart, Globe } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -13,10 +13,10 @@ export default function Footer() {
             </div>
             <p className="mt-3 flex items-start gap-2 text-sm text-white/80">
               <MapPin size={16} className="mt-0.5 shrink-0" />
-              No. 69-1, 2nd Floor, Park View Enclave, Road No. 1, Jubilee Hills, Near TV5, Hyderabad, Telangana 500033.
+              # 6-6-576, Near Mancherial Chowrastha, Near Civil Hospital, Opp. Vasudeva Hospital, Karimnagar, Telangana - 505 001.
             </p>
             <p className="mt-3 flex items-center gap-2 text-sm text-white/80">
-              <Phone size={16} /> +91 xxxxx xxxxx
+              <Phone size={16} /> +91 70366 70881 / 70366 70887
             </p>
             <p className="mt-2 flex items-center gap-2 text-sm text-white/80">
               <Mail size={16} /> doctor@wecarehomeopathy.com
