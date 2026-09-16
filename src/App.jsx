@@ -18,7 +18,7 @@ export default function App() {
   const openAppointment = () => setAppointmentOpen(true)
 
   return (
-    <div className="flex min-h-screen flex-col font-body text-brand-ink overflow-x-hidden">
+    <div className="flex min-h-screen flex-col font-body text-brand-ink">
       <ScrollToTop />
       <Header onBookAppointment={openAppointment} />
 

@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <div>
-      <div className="bg-brand-bg px-6 py-16">
+      <div className="bg-brand-bg px-6 pt-16 pb-8">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-wide text-brand-red">About Us</p>
           <h1 className="mt-2 font-heading text-3xl font-extrabold text-brand-blue md:text-4xl">
@@ -14,19 +14,23 @@ export default function About() {
         </div>
       </div>
 
-      {/* Meet Our Doctor Section */}
-      <div className="bg-brand-bg py-16">
+      {/* Meet Our Doctors Section */}
+      <div className="bg-brand-bg pb-16">
         <div className="mx-auto max-w-7xl px-6">
           <h2 className="mb-10 text-center font-heading text-3xl font-extrabold text-brand-blue">
-            Meet Our Doctor
+            Meet Our Doctors
           </h2>
           <div className="mx-auto flex max-w-5xl flex-col gap-10 rounded-xl2 bg-white p-8 shadow-card border border-brand-border md:flex-row md:items-start md:p-12">
-            {/* Photo Placeholder */}
-            <div className="w-full shrink-0 md:w-1/3">
-              <div className="aspect-[3/4] w-full rounded-2xl bg-brand-bg flex items-center justify-center border-2 border-dashed border-brand-border text-center p-4">
-                <span className="text-sm font-semibold text-brand-slate">Doctor Photo<br/>(Portrait Placeholder)</span>
+              {/* Doctor Photo */}
+              <div className="w-full shrink-0 md:w-1/3">
+                <div className="aspect-[3/4] w-full overflow-hidden rounded-2xl bg-[#f8fafc] border border-brand-border shadow-sm">
+                  <img 
+                    src="/dr-manasa.jpg" 
+                    alt="Dr. Manasa - We Care Homeopathy" 
+                    className="h-full w-full object-cover scale-[1.15] origin-[50%_75%]"
+                  />
+                </div>
               </div>
-            </div>
             
             {/* Doctor Details */}
             <div className="flex-1">
