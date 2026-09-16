@@ -20,7 +20,9 @@ export default function About() {
           <h2 className="mb-10 text-center font-heading text-3xl font-extrabold text-brand-blue">
             Meet Our Doctors
           </h2>
-          <div className="mx-auto flex max-w-5xl flex-col gap-10 rounded-xl2 bg-white p-8 shadow-card border border-brand-border md:flex-row md:items-start md:p-12">
+          <div className="flex flex-col gap-10">
+            {/* Dr. Manasa Card */}
+            <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 rounded-xl2 bg-white p-8 shadow-card border border-brand-border md:flex-row md:items-start md:p-12">
               {/* Doctor Photo */}
               <div className="w-full shrink-0 md:w-1/3">
                 <div className="aspect-[3/4] w-full overflow-hidden rounded-2xl bg-[#f8fafc] border border-brand-border shadow-sm">
@@ -84,6 +86,33 @@ export default function About() {
                     </span>
                   ))}
                 </div>
+              </div>
+            </div>
+          </div>
+
+            {/* Dr. Satyanarayana Dasanam Card */}
+            <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 rounded-xl2 bg-white p-8 shadow-card border border-brand-border md:flex-row md:items-start md:p-12">
+              {/* Doctor Photo */}
+              <div className="w-full shrink-0 md:w-1/3">
+                <div className="aspect-[3/4] w-full overflow-hidden rounded-2xl bg-[#f8fafc] border border-brand-border shadow-sm">
+                  <img 
+                    src="/dr-satyanarayana.jpg" 
+                    alt="Dr. Satyanarayana Dasanam - We Care Homeopathy" 
+                    className="h-full w-full object-cover scale-[1.15] origin-[50%_75%]"
+                  />
+                </div>
+              </div>
+              
+              {/* Doctor Details */}
+              <div className="flex-1">
+                <div className="mb-4">
+                  <h3 className="font-heading text-3xl font-extrabold text-brand-blue">Dr. Satyanarayana Dasanam</h3>
+                  <p className="mt-1 font-semibold text-brand-blue">BHMS</p>
+                </div>
+                
+                <p className="text-sm italic text-brand-slate">
+                  Information regarding experience, education, and specializations will be updated soon.
+                </p>
               </div>
             </div>
           </div>
