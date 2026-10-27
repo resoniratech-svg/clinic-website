@@ -11,14 +11,14 @@ const whyChooseUs = [
 ]
 
 const heroImages = [
-  '/homeTransition9.png',
-  '/homeTransition6.png',
+  '/homeTransition9.webp',
+  '/homeTransition6.webp',
   // '/homepageTransition8.png',
-  '/homeTransition7.png',
-  '/homePageTrans5.png',
-  '/homeTransition10.png',
-  '/homeTransition11.png',
-  '/homeTransition12.png'
+  '/homeTransition7.webp',
+  '/homePageTrans5.webp',
+  '/homeTransition10.webp',
+  '/homeTransition11.webp',
+  '/homeTransition12.webp'
 ]
 
 const whatIsHomeopathy = [
@@ -213,7 +213,7 @@ export default function Home({ onBookAppointment }) {
       <section 
         className="relative overflow-hidden"
         style={{ 
-          backgroundImage: 'url(/homeBackground2.png)', 
+          backgroundImage: 'url(/homeBackground2.webp)', 
           backgroundSize: 'cover', 
           backgroundPosition: 'center', 
           backgroundRepeat: 'no-repeat' 
