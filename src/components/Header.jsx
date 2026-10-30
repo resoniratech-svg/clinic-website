@@ -48,7 +48,7 @@ export default function Header({ onBookAppointment }) {
         {/* Main nav */}
         <div className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-2 md:px-6">
           <Link to="/" className="flex items-center md:ml-8">
-            <img src="/wecareLogo.jpeg" alt="We Care Homeopathy Logo" className="h-20 md:h-25 w-auto object-contain" />
+            <img src="/logo2.png" alt="We Care Homeopathy Logo" className="h-20 md:h-25 w-auto object-contain" />
           </Link>
 
           {/* Desktop nav */}
@@ -119,7 +119,7 @@ export default function Header({ onBookAppointment }) {
           {/* Top Bar with Logo & Close Button */}
           <div className="flex items-center justify-between border-b border-brand-border bg-white px-4 py-3">
             <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center">
-              <img src="/wecareLogo.jpeg" alt="We Care Homeopathy Logo" className="h-14 w-auto object-contain" />
+              <img src="/logo2.png" alt="We Care Homeopathy Logo" className="h-14 w-auto object-contain" />
             </Link>
             <button
               onClick={() => setMobileOpen(false)}
