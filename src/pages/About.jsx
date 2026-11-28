@@ -64,9 +64,11 @@ export default function About() {
                 </div>
                 <div>
                   <p className="mb-2 font-bold text-brand-ink">Clinic Location</p>
-                  <p className="text-brand-slate">
+                  <p className="text-brand-slate leading-relaxed">
                     We Care Homeopathy<br />
-                    Jyothinagar, Karimnagar
+                    # 6-6-576, Near Mancherial Chowrastha,<br />
+                    Near Civil Hospital, Opp. Vasudeva Hospital,<br />
+                    Karimnagar, <span className="whitespace-nowrap">Telangana - 505&nbsp;001.</span>
                   </p>
                 </div>
               </div>
